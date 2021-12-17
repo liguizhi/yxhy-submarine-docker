@@ -1,0 +1,32 @@
+version: "3"
+services:
+    submarine:
+        image: liguizhi/submarine-jdk8-node12:latest
+        restart: always
+        ports:
+            - "6001:6001"
+            - "6002:6002"
+            - "8008:8008"
+        volumes:
+            - "/Users/liguizhi/yaxindev/submarine-095:/data/submarine-095:rw"
+            - "/Users/liguizhi/yaxindev/submarine-095-admin-fe:/data/submarine-095-admin-fe"
+            - "/Users/liguizhi/yaxindev/submarine-095-fe:/data/submarine-095-fe"
+            - "./start.sh:/data/start.sh"
+
+        command: 
+            # - cd /data/submarine-095 && gradle build
+            # - cp -r /data/submarine-095/src/main/resources/config /data/config && cp /data/submarine-095/build/libs/CECD-0.0.1-SNAPSHOT.jar /data/ #8008
+            # - java -jar ECD-0.0.1-SNAPSHOT.jar &
+            # - cd /data/submarine-095-fe && npm run serve & #6001
+            # - cd /data/submarine-095-admin-fe && npm run serve & #6002
+            # - bash /data/start.sh
+            - /usr/sbin/init
+        # command: "/usr/sbin/init"
+        tty: true
+        # cap_add:
+        #     - SYS_PTRACE
+
+        hostname: submarine1
+        privileged: true
+
+
